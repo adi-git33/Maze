@@ -2,14 +2,14 @@
 
 #include "Maze2d.hpp"
 
-void save(vector<Employee> &EmployeeVec)
+void save(vector<Maze2d> &EmployeeVec)  // compress maze and save to memory
 {
     ofstream empsBin("emps.bin", ios::binary | std::ios::trunc);
     if (empsBin.is_open() == true)
     {
         for (int i = 0; i < EmployeeVec.size(); i++)
         {
-            empsBin.write((char *)&EmployeeVec[i], sizeof(Employee));
+            empsBin.write((char *)&EmployeeVec[i], sizeof(Maze2d));
         }
         empsBin.close();
     }
@@ -20,16 +20,16 @@ void save(vector<Employee> &EmployeeVec)
     }
 }
 
-vector<Employee> load(vector<Employee> newVec)
+vector<Maze2d> load(vector<Maze2d> newVec)  // load comppressed maze
 {
     ifstream bin;
     bin.open("emps.bin", ios::binary);
     if (bin.is_open() == true)
     {
-        Employee *tmpEmpy = new Employee();
-        while (bin.read((char *)(tmpEmpy), sizeof(Employee)))
+        Maze2d *tmpMaze = new Maze2d();
+        while (bin.read((char *)(tmpMaze), sizeof(Maze2d)))
         {
-            newVec.push_back(*tmpEmpy);
+            newVec.push_back(*tmpMaze);
         }
         bin.close();
     }

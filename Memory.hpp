@@ -1,5 +1,4 @@
 // ----- Code by: Moran Sinai ID: 206402281 and Adi Levi ID: 316116052
-
 #pragma once
 #include <iostream>
 #include <string>
@@ -39,6 +38,8 @@ class FileNotRead : public exception
 public:
     const string what() { return "Couldn't read File until the end"; };
 };
+
+// get file size????
 
 template <class K, class V>
 class CacheMemory
