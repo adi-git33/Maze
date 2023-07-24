@@ -37,7 +37,7 @@ public:
 class SimplaMaze2dGenerator : public Maze2dGenerator
 {
 private:
-    int *m_arrMaze;
+    Maze2d *m_arrMaze;
 
 public:
     // Constractors

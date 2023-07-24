@@ -3,7 +3,7 @@
 #include "CLI.hpp"
 #include "Controller.hpp"
 
-class View :  public Controller
+class View 
 {
 private:
     CLI interfate;

@@ -2,16 +2,27 @@
 
 #pragma once
 #include "Memory.hpp"
+#include <iostream>
+#include <string>
+#include <memory>
+#include <map>
+#include <utility>
+#include <exception>
+#include <vector>
+#include <iterator>
+#include <fstream>
+#include <cstring>
 
 using namespace std;
 
+template<class T1, class T2>
 class Maze2d
 {
 private:
     int m_mazeID;
-    pair<int, int> m_start;
-    pair<int, int> m_goal;
-    pair<int, int> m_position;
+    pair<T1, T2> m_start;
+    pair<T1, T2> m_goal;
+    pair<T1, T2> m_position;
     int m_rows;
     int m_cols;
     int *m_arrMaze; // int m_salary;
@@ -23,7 +34,7 @@ public:
     // Destractor
     ~Maze2d(){};
     // Operators
-    friend ostream &operator<<(ostream &os, pair<int, int> const &output)
+    friend ostream &operator<<(ostream &os, pair<T1, T2> const &output)
     {
         // prints pair
     }
@@ -32,11 +43,11 @@ public:
         // prints maze
     }
     // Getters
-    pair<int, int> getStartPosition() { return m_start; };
-    pair<int, int> getGoalPosition() { return m_goal; };
-    pair<int, int> getCurrentPosition() { return m_position; };
+    pair<T1, T2> getStartPosition() { return m_start; };
+    pair<T1, T2> getGoalPosition() { return m_goal; };
+    pair<T1, T2> getCurrentPosition() { return m_position; };
     // Setters
-    void setPosition(pair<int, int> newPos) { m_position = newPos; };
+    void setPosition(pair<T1, T2> newPos) { m_position = newPos; };
     // Functions
     void getData()
     {
@@ -51,8 +62,8 @@ public:
     }
 };
 
-void save(vector<Maze2d> &EmployeeVec);
-vector<Maze2d> load(vector<Maze2d> newVec);
+// void save(vector<Maze2d> &EmployeeVec);
+// vector<Maze2d> load(vector<Maze2d> newVec);
 
 // class EightPuzzel
 // {
