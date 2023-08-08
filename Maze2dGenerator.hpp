@@ -10,6 +10,7 @@
 #include <iterator>
 #include <fstream>
 #include <cstring>
+#include <chrono>
 
 using namespace std;
 
@@ -25,31 +26,17 @@ public:
     // Getters
     // Setters
     // Functions
-    virtual Maze2d mazeGenerator(int row, int col);
-    virtual string measureAlgorithmTime(alg A, Maze2d M){
-        // system clock start time
-        // mazeGenerator()
-        // system clock end time
-        // return measure time that is comfrotable to read
+    virtual Maze2d mazeGenerator();
+    virtual string measureAlgorithmTime()
+    {
+        chrono::time_point<chrono::system_clock> startTime = chrono::system_clock::now();
+        mazeGenerator();
+        chrono::time_point<chrono::system_clock>EndTime = chrono::system_clock::now();
+        chrono::duration<double> timeDiff = startTime - EndTime;
+        double timeMeasure = timeDiff.count();
+        string result = "It took the algorithm " + to_string(timeMeasure) + " seconds";
+        return result;
     };
 };
 
-class SimplaMaze2dGenerator : public Maze2dGenerator
-{
-private:
-    Maze2d *m_arrMaze;
 
-public:
-    // Constractors
-    SimplaMaze2dGenerator();
-    // Destractors
-    virtual ~SimplaMaze2dGenerator();
-    // Operators
-
-    // Getters
-    // Setters
-    // Functions
-    virtual Maze2d mazeGenerator(int row, int col){
-        // creates random maze with prim
-    };
-};

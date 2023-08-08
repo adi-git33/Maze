@@ -1,3 +1,4 @@
+#pragma once
 #include "CommonSeacher.hpp"
 
 template <class T>

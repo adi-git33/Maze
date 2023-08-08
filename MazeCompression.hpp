@@ -1,5 +1,5 @@
 // ----- Code by: Moran Sinai ID: 206402281 and Adi Levi ID: 316116052
-
+#pragma once
 #include "Maze2d.hpp"
 
 void save(vector<Maze2d> &EmployeeVec)  // compress maze and save to memory

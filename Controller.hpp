@@ -1,3 +1,4 @@
+#pragma once
 #include "Model.hpp"
 #include "View.hpp"
 
