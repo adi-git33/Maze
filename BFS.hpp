@@ -1,5 +1,7 @@
-#pragma once
-#include "CommonSeacher.hpp"
+#ifndef __BFS__
+#define __BFS__
+
+#include "CommonSearcher.hpp"
 
 template <class T>
 class BFS : public CommonSearcher<T>
@@ -7,9 +9,10 @@ class BFS : public CommonSearcher<T>
 public:
 	virtual Solution<T> search(const Searchable<T>& s) 
 	{
-		/*TODO search code*/ 
-		
+		cout << "BFS Solution" << endl;		
 		
 		return Solution<T>(); 
 	};
 };
+
+#endif

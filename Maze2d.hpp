@@ -1,23 +1,11 @@
-// ----- Code by: Moran Sinai ID: 206402281 and Adi Levi ID: 316116052
-
-#pragma once
-
-#include "Memory.hpp"
+#ifndef __MAZE2D__
+#define __MAZE2D__
 
 #include <iostream>
-#include <string>
-#include <memory>
-#include <map>
-#include <utility>
-#include <exception>
 #include <vector>
-#include <iterator>
-#include <fstream>
-#include <cstring>
 
 using namespace std;
 
-// template<class T1, class T2>
 class Maze2d
 {
 private:
@@ -84,7 +72,23 @@ public:
         {
             for (int j = 0; j < Maze.m_arrMaze[i].size(); j++)
             {
-                os << Maze.m_arrMaze[i][j] << " ";
+                switch ((Maze.m_arrMaze[i][j]))
+                {
+                case 0: // way
+                {
+                    os << "o";
+                    break;
+                }
+                case 1: // wall
+                    os << "x";
+                    break;
+                case 2: // start
+                    os << "S";
+                    break;
+                case 3: // goal
+                    os << "G";
+                    break;
+                }
             }
             os << endl;
         }
@@ -111,9 +115,9 @@ public:
         return *this;
     };
     // Getters
-    int getStartPosition() { return *m_start; };
-    int getGoalPosition() { return *m_goal; };
-    int getCurrentPosition() { return *m_position; };
+    int* getStartPosition() { return m_start; };
+    int* getGoalPosition() { return m_goal; };
+    int* getCurrentPosition() { return m_position; };
     // Setters
     void setPosition(int *newPos)
     {
@@ -125,8 +129,8 @@ public:
     {
         cout << "Maze Info" << endl;
         cout << "Maze id: " << m_mazeID << endl;
-        cout << "Maze Start Point: [" << m_start[0] << "," << m_start[1] << endl;
-        cout << "Maze End Point: [" << m_goal[0] << "," << m_goal[1] << endl;
+        cout << "Maze Start Point: [" << m_start[0] << "," << m_start[1] << "]" << endl;
+        cout << "Maze End Point: [" << m_goal[0] << "," << m_goal[1] << "]" << endl;
         cout << "Maze Height: " << m_cols << endl;
         cout << "Maze Width: " << m_rows << endl;
     };
@@ -135,4 +139,40 @@ public:
         cout << "Loaded Maze from Memory";
         // gets array and decompose
     };
+    vector<int *> *getPossibleMoves(int *state)
+    {
+        vector<int *> *possibleMoves = new vector<int *>;
+        int row = state[0];
+        int column = state[1];
+        int pos[2] = {0};
+        if (m_arrMaze[row + 1][column] == 0)
+        {
+            pos[0] = (row + 1);
+            pos[1] = (column);
+            possibleMoves->push_back(pos);
+        }
+        if (m_arrMaze[row - 1][column] == 0)
+        {
+            pos[0] = (row - 1);
+            pos[1] = (column);
+            possibleMoves->push_back(pos);
+        }
+        if (m_arrMaze[row][column + 1] == 0)
+        {
+            pos[0] = (row);
+            pos[1] = (column + 1);
+            possibleMoves->push_back(pos);
+        }
+        if (m_arrMaze[row][column - 1] == 0)
+        {
+            pos[0] = (row);
+            pos[1] = (column - 1);
+            possibleMoves->push_back(pos);
+        }
+
+        return possibleMoves;
+    }
 };
+
+
+#endif

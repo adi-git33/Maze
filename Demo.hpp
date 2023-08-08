@@ -1,15 +1,10 @@
-#pragma once
-#include "Maze2d.hpp"
-#include <iostream>
-#include <string>
-#include <memory>
-#include <map>
-#include <utility>
-#include <exception>
-#include <vector>
-#include <iterator>
-#include <fstream>
-#include <cstring>
+#ifndef __DEMO__
+#define __DEMO__
+
+#include "SimpleMaze2dGenerator.hpp"
+#include "BFS.hpp"
+#include "AStar.hpp"
+#include "Maze2dSearchable.hpp"
 
 using namespace std;
 class Demo
@@ -17,18 +12,28 @@ class Demo
 private:
 public:
     // Constractors
-    Demo();
+    Demo(){};
     // Destractors
-    virtual ~Demo();
+    ~Demo(){};
     // Operators
     // Getters
     // Setters
     // Functions
-    void Run(){
-        // Creates maze
-        // prints maze
-        // sovles with bfs
-        // solves with astar with each h func (runs twice)
+    void Run()
+    {
+        SimplaMaze2dGenerator simply;
+        Maze2d demoMaze(simply.mazeGenerator());
+        cout << demoMaze;
+
+        Maze2dSearchable Searchie(demoMaze);
+        BFS<int *> *searchBFS = new BFS<int *>();
+        Solution<int *> bfsSol = searchBFS->search(Searchie);
+
+        AStar<int *> *searchAStar = new AStar<int *>();
+        Solution<int *> astarSol = searchAStar->search(Searchie);
+
         // display how many state every alg solved
     };
 };
+
+#endif

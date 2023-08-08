@@ -1,16 +1,18 @@
-#pragma once
+#ifndef __ASTAR__
+#define __ASTAR__
 
-#include "CommonSeacher.hpp"
+#include "CommonSearcher.hpp"
 
 template <class T>
 class AStar : public CommonSearcher<T>
 {
 public:
-	virtual Solution<T> search(const Searchable<T>& s) 
+	virtual Solution<T> search(const Searchable<T> &s)
 	{
-		/*TODO search code*/ 
-		
-		
-		return Solution<T>(); 
+		cout << "A* Solution" << endl;
+
+		return Solution<T>();
 	};
 };
+
+#endif

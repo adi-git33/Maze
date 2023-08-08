@@ -1,15 +1,11 @@
-#pragma once
+#ifndef __COMMANDHASHMAP__
+#define _COMMANDHASHMAP__
+
 #include <iostream>
-#include <string>
-#include <memory>
-#include <map>
-#include <utility>
-#include <exception>
-#include <vector>
-#include <iterator>
-#include <fstream>
 #include <cstring>
+#include <map>
 #include "Commands.hpp"
+
 
 using namespace std;
 
@@ -29,3 +25,5 @@ public:
     // Setters
     // Functions
 };
+
+#endif

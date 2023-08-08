@@ -1,4 +1,6 @@
-#pragma once
+// #pragma once
+#ifndef __VIEW__
+#define __VIEW__
 
 #include "CLI.hpp"
 #include "Controller.hpp"
@@ -15,4 +17,6 @@ public:
     // Getters
     // Setters
     // Functions
-}
+};
+
+#endif

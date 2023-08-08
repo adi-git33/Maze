@@ -1,8 +1,11 @@
-#pragma once
+// #pragma once
+#ifndef __PLAYER__
+#define __PLAYER__
 #include <string>
-#include <memory>
+// #include <memory>
 #include "Direction.hpp"
 #include "Maze2d.hpp"
+#include <iostream>
 using namespace std;
 
 class Player{
@@ -17,7 +20,9 @@ class Player{
     // Getters
     // Setters
     // Functions
-    void Move(Direction movement, Maze2d<int, int>  maze) {
+    void Move(Direction movement, Maze2d maze) {
         cout << "Player Moved." << endl;
     };
 };
+
+#endif

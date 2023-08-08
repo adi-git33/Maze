@@ -1,10 +1,13 @@
 // ----- Code by: Moran Sinai ID: 206402281 and Adi Levi ID: 316116052
-#pragma once
+// #pragma once
+#ifndef __MEMORY__
+#define __MEMORY__
+
 #include <iostream>
 #include <string>
 #include <memory>
 #include <map>
-#include <utility>
+// #include <utility>
 #include <exception>
 #include <vector>
 #include <iterator>
@@ -122,3 +125,5 @@ public:
 
 
 };
+
+#endif

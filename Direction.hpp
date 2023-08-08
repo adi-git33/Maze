@@ -1,7 +1,5 @@
-#pragma once
-#include <string>
-#include <memory>
-using namespace std;
+#ifndef __DIRECTION__
+#define __DIRECTION__
 
 enum Direction {
     Up,
@@ -9,3 +7,5 @@ enum Direction {
     Down,
     Left
 };
+
+#endif

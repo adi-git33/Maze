@@ -1,21 +1,9 @@
-#pragma once
+#ifndef __COMMANDS__
+#define __COMMANDS__
+
 #include "Maze2d.hpp"
 #include "Demo.hpp"
-#include "Maze2dGenerator.hpp"
-#include "Demo.hpp"
-#include "Demo.hpp"
-#include "Demo.hpp"
-
-#include <iostream>
-#include <string>
-#include <memory>
-#include <map>
-#include <utility>
-#include <exception>
-#include <vector>
-#include <iterator>
-#include <fstream>
-#include <cstring>
+#include "SimpleMaze2dGenerator.hpp"
 
 using namespace std;
 
@@ -60,3 +48,6 @@ class LoadMaze : public Command{
     public:
     void doCommand();
 };
+
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef __CONTROLLER__
+#define __CONTROLLER__
+
 #include "Model.hpp"
 #include "View.hpp"
 
@@ -16,3 +18,5 @@ public:
     // Setters
     // Functions
 };
+
+#endif

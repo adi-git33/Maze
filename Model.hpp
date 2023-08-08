@@ -1,6 +1,7 @@
-#pragma once
-#include <string>
-#include <memory>
+// #pragma once
+#ifndef __MODEL__
+#define __MODEL__
+
 using namespace std;
 
 class Model
@@ -14,3 +15,5 @@ public:
     // Setters
     // Functions
 };
+
+#endif

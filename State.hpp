@@ -1,7 +1,8 @@
-#pragma once
+// #pragma once
+#ifndef __STATE__
+#define __STATE__
 
 #include <string>
-#include <memory>
 using namespace std;
 
 template <class T>
@@ -10,7 +11,7 @@ class State
 private:
 	T m_state;
 	double m_cost;
-	unique_ptr<State> m_cameFrom;
+	State* m_cameFrom;
 
 public:
 	State(T &state) : m_state(state), m_cost(0), m_cameFrom(nullptr) {}
@@ -19,13 +20,4 @@ public:
 	T &getState() { return m_state; }
 };
 
-template <class T>
-class Solution
-{
-private:
-	std::vector<unique_ptr<State<T>>> m_solution;
-
-public:
-	Solution(){};
-	~Solution(){};
-};
+#endif
