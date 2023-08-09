@@ -24,6 +24,14 @@ public:
     // Getters
     // Setters
     // Functions
+    void execute(string cmd){
+        // if(m_ComMap.find(cmd)){
+        //     command.doCommand();
+        // }else{
+        //     error;
+        // }
+        
+    }
 };
 
 #endif

@@ -32,23 +32,14 @@ public:
     // Functions
     virtual Maze2d mazeGenerator()
     {
-        int rows = 0, cols = 0;
-        cout << "Enter number of rows: " << endl
-             << ">";
-        cin >> rows;
-
-        cout << "Enter number of columns: " << endl
-             << ">";
-        cin >> cols;
-
         int startPoint[2];
 
-        for (int i = 0; i < 2; i++)
-            startPoint[i] = 0;
+        startPoint[0] = 0;
+        startPoint[1] = 0;
 
         int goalPoint[2];
-        goalPoint[0] = (rows - 1);
-        goalPoint[1] = (cols - 1);
+        goalPoint[0] = rows - 1;
+        goalPoint[1] = cols - 1;
 
         vector<vector<int>> newMaze;
         vector<int> row;
@@ -65,8 +56,8 @@ public:
             newMaze.push_back(row);
             row.resize(0);
         }
-        newMaze[0][0] = 2;
-        newMaze[rows - 1][cols - 1] = 3;
+        newMaze[startPoint[0]][startPoint[1]] = 2;
+        newMaze[goalPoint[0]][goalPoint[1]] = 3;
 
         Maze2d torMaze(startPoint, goalPoint, rows, cols, newMaze);
         cout << "Maze Generated Successfully." << endl;

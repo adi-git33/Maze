@@ -7,16 +7,23 @@
 class Controller
 {
 private:
-    Model* m_model;
-    View* m_view;
-    CommandHM* m_commandList;
+    Model *m_model;
+    View *m_view;
+
 public:
     // Constractor
+    Controller()
+    {
+        Model *m_model();
+        View *m_view();
+    }
     // Destractor
+    ~Controller(){};
     // Operators
     // Getters
     // Setters
     // Functions
+    virtual void doCommand(){};
 };
 
 #endif
