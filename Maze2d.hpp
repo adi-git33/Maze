@@ -39,7 +39,6 @@ public:
 
         mazeCount++;
     };
-
     Maze2d(Maze2d const &copyMaze)
     {
         m_mazeID = copyMaze.m_mazeID;
@@ -57,6 +56,32 @@ public:
 
         m_arrMaze = copyMaze.m_arrMaze;
     };
+    Maze2d(vector<int *> mazeInVector)
+    {
+        // vector<int *> mazeData = {&m_mazeID, &m_rows, &m_cols, m_start, m_goal, m_arrMaze};
+
+        m_mazeID = *mazeInVector.at(0);
+        m_rows = *mazeInVector.at(1);
+        m_cols = *mazeInVector.at(2);
+        m_start[0] = *mazeInVector.at(3);
+        m_start[1] = *mazeInVector.at(4);
+        m_goal[0] = *mazeInVector.at(5);
+        m_goal[1] = *mazeInVector.at(6);
+
+        vector<vector<int>> newMaze;
+        vector<int> row;
+        // creates random maze
+        for (int i = 0; i < m_rows; i++)
+        {
+            for (int j = 0; j < m_cols; j++)
+            {
+                row.push_back(*mazeInVector.at(i + 7));
+            }
+            newMaze.push_back(row);
+            row.resize(0);
+        }
+    };
+
     // Destractor
     ~Maze2d(){};
     // Operators
@@ -115,9 +140,9 @@ public:
         return *this;
     };
     // Getters
-    int* getStartPosition() { return m_start; };
-    int* getGoalPosition() { return m_goal; };
-    int* getCurrentPosition() { return m_position; };
+    int *getStartPosition() { return m_start; };
+    int *getGoalPosition() { return m_goal; };
+    int *getCurrentPosition() { return m_position; };
     // Setters
     void setPosition(int *newPos)
     {
@@ -125,19 +150,19 @@ public:
         m_position[1] = newPos[1];
     };
     // Functions
-    void getData()
+    vector<int *> getData()
     {
-        cout << "Maze Info" << endl;
-        cout << "Maze id: " << m_mazeID << endl;
-        cout << "Maze Start Point: [" << m_start[0] << "," << m_start[1] << "]" << endl;
-        cout << "Maze End Point: [" << m_goal[0] << "," << m_goal[1] << "]" << endl;
-        cout << "Maze Height: " << m_cols << endl;
-        cout << "Maze Width: " << m_rows << endl;
-    };
-    void buildMaze(int arrmaze[])
-    {
-        cout << "Loaded Maze from Memory";
-        // gets array and decompose
+        // cout << "Maze Info" << endl;
+        // cout << "Maze id: " << m_mazeID << endl;
+        // cout << "Maze Start Point: [" << m_start[0] << "," << m_start[1] << "]" << endl;
+        // cout << "Maze End Point: [" << m_goal[0] << "," << m_goal[1] << "]" << endl;
+        // cout << "Maze Height: " << m_cols << endl;
+        // cout << "Maze Width: " << m_rows << endl;
+        vector<int *> mazeData = {&m_mazeID, &m_rows, &m_cols, &m_start[0], &m_start[1], &m_goal[0], &m_goal[1]};
+        mazeData.insert(mazeData.end(), m_arrMaze.begin(), m_arrMaze.end());
+        cout << "converted Maze to Vector" << endl;
+
+        return mazeData;
     };
     vector<int *> *getPossibleMoves(int *state)
     {
@@ -173,6 +198,5 @@ public:
         return possibleMoves;
     }
 };
-
 
 #endif
