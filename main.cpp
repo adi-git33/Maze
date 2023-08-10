@@ -52,7 +52,6 @@ int main()
     // controller gameController(gameView, gameModel);
     // gameController.view.cli.start();
 
-    
 
     return 0;
 }

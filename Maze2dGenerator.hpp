@@ -19,11 +19,11 @@ public:
     // Getters
     // Setters
     // Functions
-    virtual Maze2d mazeGenerator() = 0;
-    string measureAlgorithmTime()
+    virtual Maze2d mazeGenerator(string name, int rows, int cols) = 0;
+    string measureAlgorithmTime(string name, int rows, int cols)
     {
         chrono::time_point<chrono::system_clock> startTime = chrono::system_clock::now();
-        mazeGenerator();
+        mazeGenerator(name, rows, cols);
         chrono::time_point<chrono::system_clock>EndTime = chrono::system_clock::now();
         chrono::duration<double> timeDiff = EndTime -startTime;
         double timeMeasure = timeDiff.count();

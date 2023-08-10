@@ -30,28 +30,8 @@ public:
     // Getters
     // Setters
     // Functions
-    virtual Maze2d mazeGenerator()
+    virtual Maze2d mazeGenerator(string name, int rows, int cols)
     {
-        string name;
-        cout << "Enter maze name: " << endl
-             << ">";
-        cin >> name;
-
-        int rows = 0, cols = 0;
-        do
-        {
-            cout << "Enter number of rows: " << endl
-                 << ">";
-            cin >> rows;
-        } while (rows <= 0);
-
-        do
-        {
-            cout << "Enter number of columns: " << endl
-                 << ">";
-            cin >> cols;
-        } while (cols <= 0);
-
         int startPoint[2];
         startPoint[0] = 0;
         startPoint[1] = 0;
@@ -75,18 +55,6 @@ public:
             row.resize(0);
         }
 
-        // vector<int> row;
-        // // creates random maze
-        // for (int i = 0; i < m_rows; i++)
-        // {
-        //     for (int j = 0; j < m_cols; j++)
-        //     {
-        //         row.push_back(mazeInVector.at(index));
-        //         index++;
-        //     }
-        //     m_arrMaze.push_back(row);
-        //     row.resize(0);
-        // }
         newMaze[startPoint[0]][startPoint[1]] = 2;
         newMaze[goalPoint[0]][goalPoint[1]] = 3;
 

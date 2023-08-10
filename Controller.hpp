@@ -2,23 +2,26 @@
 // #define __CONTROLLER__
 #pragma once
 
-#include "Model.hpp"
-#include "View.hpp"
+#include <map>
+#include "Maze2d.hpp"
+// #include "Model.hpp"
+// #include "View.hpp"
 
 using namespace std;
 
 class Controller
 {
-private:
-    Model *m_model;
-    View *m_view;
+protected:
+    map<string, Maze2d> mazesArr;
+    // Model *m_model;
+    // View *m_view;
 
 public:
     // Constractor
     Controller()
     {
-        Model *m_model();
-        View *m_view();
+        // Model *m_model();
+        // View *m_view();
     }
     // Destractor
     ~Controller(){};
