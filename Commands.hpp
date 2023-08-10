@@ -1,14 +1,16 @@
-#ifndef __COMMANDS__
-#define __COMMANDS__
+// #ifndef __COMMANDS__
+// #define __COMMANDS__
+
+#pragma once
 
 #include "Maze2d.hpp"
 #include "Demo.hpp"
 #include "SimpleMaze2dGenerator.hpp"
-#include "Controller.hpp"
+// #include "Controller.hpp"
 
 using namespace std;
-
-class Command : public Controller
+//: public Controller
+class Command
 {
 private:
 public:
@@ -27,19 +29,18 @@ class GenerateMaze : public Command
 {
 private:
 public:
-    void doCommand()
-    {
-        int rows = 0, cols = 0;
-        cout << "Enter number of rows: " << endl
-             << ">";
-        cin >> rows;
+    void doCommand(){
+        // int rows = 0, cols = 0;
+        // cout << "Enter number of rows: " << endl
+        //      << ">";
+        // cin >> rows;
 
-        cout << "Enter number of columns: " << endl
-             << ">";
-        cin >> cols;
-        string cmd;
-        SimplaMaze2dGenerator m_generator;
-        m_generator.mazeGenerator();
+        // cout << "Enter number of columns: " << endl
+        //      << ">";
+        // cin >> cols;
+        // string cmd;
+        // SimplaMaze2dGenerator m_generator;
+        // m_generator.mazeGenerator();
     };
 };
 
@@ -70,4 +71,4 @@ public:
     void doCommand();
 };
 
-#endif
+// #endif

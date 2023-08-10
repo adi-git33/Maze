@@ -1,5 +1,7 @@
 #include "CLI.hpp"
 
+using namespace std;
+
 void printMenu(){
     cout << "\t\t--Menu--" << endl;
     cout << "1. Display Files" << endl;

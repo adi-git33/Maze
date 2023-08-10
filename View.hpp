@@ -1,9 +1,10 @@
-// #pragma once
-#ifndef __VIEW__
-#define __VIEW__
+#pragma once
+// #ifndef __VIEW__
+// #define __VIEW__
 
 #include "CLI.hpp"
-#include "Controller.hpp"
+
+using namespace std;
 
 class View 
 {
@@ -19,4 +20,4 @@ public:
     // Functions
 };
 
-#endif
+// #endif

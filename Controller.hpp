@@ -1,8 +1,11 @@
-#ifndef __CONTROLLER__
-#define __CONTROLLER__
+// #ifndef __CONTROLLER__
+// #define __CONTROLLER__
+#pragma once
 
 #include "Model.hpp"
 #include "View.hpp"
+
+using namespace std;
 
 class Controller
 {
@@ -23,7 +26,7 @@ public:
     // Getters
     // Setters
     // Functions
-    virtual void doCommand(){};
+    // virtual void doCommand(){};
 };
 
-#endif
+// #endif

@@ -8,25 +8,23 @@
 
 int main()
 {
-    MazeCompression mazeFiles;
-    SimplaMaze2dGenerator createMaze;
-    Maze2d myMaze1 = createMaze.mazeGenerator();
-    cout << myMaze1;
+    // MazeCompression mazeFiles;
+    // SimplaMaze2dGenerator createMaze;
+    // Maze2d myMaze1 = createMaze.mazeGenerator();
+    // cout << myMaze1;
 
-    vector<vector<int>> mazesArr;
-    vector<int> maze1Data = myMaze1.getData();
-    mazesArr.push_back(maze1Data);
-    mazeFiles.save(mazesArr);
+    // vector<int> maze1Data = myMaze1.getData();
+    // mazeFiles.save(maze1Data, myMaze1.getMazeName());
 
-    vector<vector<int>> loadmazeArr = mazeFiles.load();
-    Maze2d loadedMaze1(loadmazeArr.at(0));
+    // vector<int> loadmazeArr = mazeFiles.load(myMaze1.getMazeName());
+    // Maze2d loadedMaze1(loadmazeArr, myMaze1.getMazeName());
 
-    cout << "maze 1" << endl;
-    cout << loadedMaze1;
+    // cout << "maze 1" << endl;
+    // cout << loadedMaze1;
 
-    Maze2dSearchable Searchie(myMaze1);
-    BFS<int *> *searchBFS = new BFS<int *>();
-    Solution<int *> soluchie = searchBFS->search(Searchie);
+    // Maze2dSearchable Searchie(myMaze1);
+    // BFS<int *> *searchBFS = new BFS<int *>();
+    // Solution<int *> soluchie = searchBFS->search(Searchie);
 
     // cout << myMaze1;
     // int *currentPosition = myMaze1.getCurrentPosition();

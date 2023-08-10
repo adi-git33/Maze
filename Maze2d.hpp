@@ -9,7 +9,8 @@ using namespace std;
 class Maze2d
 {
 private:
-    int m_mazeID;
+    int m_id;
+    string m_mazeName;
     int m_start[2];
     int m_goal[2];
     int m_position[2];
@@ -19,10 +20,11 @@ private:
 
 public:
     // Constractor
-    Maze2d(int *newStart, int *newGoal, int newRows, int newCols, vector<vector<int>> mazeArr)
+    Maze2d(string name, int *newStart, int *newGoal, int newRows, int newCols, vector<vector<int>> mazeArr)
     {
-        static int mazeCount = 1;
-        m_mazeID = mazeCount;
+        int static count = 1;
+        m_id = count;
+        m_mazeName = name;
         m_rows = newRows;
         m_cols = newCols;
 
@@ -36,12 +38,12 @@ public:
             m_position[i] = m_start[i];
 
         m_arrMaze = mazeArr;
-
-        mazeCount++;
+        count++;
     };
     Maze2d(Maze2d const &copyMaze)
     {
-        m_mazeID = copyMaze.m_mazeID;
+        m_id = copyMaze.m_id;
+        m_mazeName = copyMaze.m_mazeName;
         m_rows = copyMaze.m_rows;
         m_cols = copyMaze.m_cols;
 
@@ -56,11 +58,11 @@ public:
 
         m_arrMaze = copyMaze.m_arrMaze;
     };
-    Maze2d(vector<int> &mazeInVector)
+    Maze2d(vector<int> &mazeInVector, string mazeName)
     {
-        // vector<int *> mazeData = {&m_mazeID, &m_rows, &m_cols, m_start, m_goal, m_arrMaze};
+        m_mazeName = mazeName;
 
-        m_mazeID = mazeInVector.at(0);
+        m_id = mazeInVector.at(0);
         m_rows = mazeInVector.at(1);
         m_cols = mazeInVector.at(2);
         m_start[0] = mazeInVector.at(3);
@@ -68,7 +70,7 @@ public:
         m_goal[0] = mazeInVector.at(5);
         m_goal[1] = mazeInVector.at(6);
 
-        int index=7;
+        int index = 7;
         vector<int> row;
         // creates random maze
         for (int i = 0; i < m_rows; i++)
@@ -126,7 +128,7 @@ public:
 
     Maze2d &operator=(const Maze2d &assignMaze)
     {
-        this->m_mazeID = assignMaze.m_mazeID;
+        this->m_mazeName = assignMaze.m_mazeName;
         this->m_rows = assignMaze.m_rows;
         this->m_cols = assignMaze.m_cols;
 
@@ -150,6 +152,7 @@ public:
     int getPositionInfo(int row, int col) { return m_arrMaze[row][col]; };
     int getRow() { return m_rows; };
     int getColumn() { return m_cols; };
+    string getMazeName() { return m_mazeName; };
     // Setters
     void setPosition(int *newPos)
     {
@@ -166,7 +169,9 @@ public:
         // cout << "Maze End Point: [" << m_goal[0] << "," << m_goal[1] << "]" << endl;
         // cout << "Maze Height: " << m_cols << endl;
         // cout << "Maze Width: " << m_rows << endl;
-        vector<int> mazeData = {m_mazeID, m_rows, m_cols, m_start[0], m_start[1], m_goal[0], m_goal[1]};
+        vector<int> mazeData;
+        mazeData = {m_id, m_rows, m_cols, m_start[0], m_start[1], m_goal[0], m_goal[1]};
+
         for (const auto &row : m_arrMaze)
         {
             mazeData.insert(mazeData.end(), row.begin(), row.end());
