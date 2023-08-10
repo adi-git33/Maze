@@ -1,11 +1,14 @@
 // ----- Code by: Moran Sinai ID: 206402281 and Adi Levi ID: 316116052
+// #pragma once
+#ifndef __MEMORY__
+#define __MEMORY__
 
-#pragma once
+#include "Maze2d.hpp"
+
 #include <iostream>
 #include <string>
 #include <memory>
 #include <map>
-#include <utility>
 #include <exception>
 #include <vector>
 #include <iterator>
@@ -40,6 +43,8 @@ public:
     const string what() { return "Couldn't read File until the end"; };
 };
 
+// get file size????
+
 template <class K, class V>
 class CacheMemory
 {
@@ -58,7 +63,6 @@ public:
     };
 
     // Funcs
-
     void add(const K &addKey, const V &addValue)
     {
         DuplicateKey dupErr;
@@ -119,5 +123,20 @@ public:
         return CacheValues;
     };
 
+    vector<V> getMemoryValues()
+    {
+        vector<V> memoryValues;
 
+        if (m_Memory.empty() != true)
+        {
+            for (auto it = m_Memory.begin(); it != m_Memory.end(); ++it)
+            {
+                auto ptr = it->second.lock();
+                memoryValues.push_back(*ptr);
+            }
+        }
+        return memoryValues;
+    };
 };
+
+#endif
