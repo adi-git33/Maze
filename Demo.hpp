@@ -21,16 +21,16 @@ public:
     // Functions
     void Run()
     {
-        SimplaMaze2dGenerator simply;
-        Maze2d demoMaze(simply.mazeGenerator());
-        cout << demoMaze;
+        // SimplaMaze2dGenerator simply;
+        // Maze2d demoMaze(simply.mazeGenerator());
+        // cout << demoMaze;
 
-        Maze2dSearchable Searchie(demoMaze);
-        BFS<int *> *searchBFS = new BFS<int *>();
-        Solution<int *> bfsSol = searchBFS->search(Searchie);
+        // Maze2dSearchable Searchie(demoMaze);
+        // BFS<int *> *searchBFS = new BFS<int *>();
+        // Solution<int *> bfsSol = searchBFS->search(Searchie);
 
-        AStar<int *> *searchAStar = new AStar<int *>();
-        Solution<int *> astarSol = searchAStar->search(Searchie);
+        // AStar<int *> *searchAStar = new AStar<int *>();
+        // Solution<int *> astarSol = searchAStar->search(Searchie);
 
         // display how many state every alg solved
     };

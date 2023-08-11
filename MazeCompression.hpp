@@ -9,8 +9,6 @@
 #include <fstream>
 #include <dirent.h>
 
-namespace fs = std::filesystem;
-
 class MazeCompression
 {
 private:
@@ -46,21 +44,21 @@ public:
         return loadedVector;
     }
 
-    int getFileSize(string fileName)
-    {
-        string filename = "example.txt"; // Replace with your file name
+    // int getFileSize(string fileName)
+    // {
+    //     string filename = "example.txt"; // Replace with your file name
 
-        if (fs::exists(filename))
-        {
-            std::cout << "File exists in the current folder." << std::endl;
-        }
-        else
-        {
-            std::cout << "File does not exist in the current folder." << std::endl;
-        }
-    };
-    void printFilesInPath(string path){
+    //     if (fs::exists(filename))
+    //     {
+    //         std::cout << "File exists in the current folder." << std::endl;
+    //     }
+    //     else
+    //     {
+    //         std::cout << "File does not exist in the current folder." << std::endl;
+    //     }
+    // };
+    // void printFilesInPath(string path){
 
-    };
+    // };
 };
 #endif
