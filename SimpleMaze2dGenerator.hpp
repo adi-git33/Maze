@@ -4,28 +4,16 @@
 #include "Maze2d.hpp"
 #include "Maze2dGenerator.hpp"
 
-#include <iostream>
-#include <string>
-// #include <memory>
-// #include <map>
-// #include <utility>
-// #include <exception>
-#include <vector>
-// #include <iterator>
-// #include <fstream>
-// #include <cstring>
-#include <cstdlib>
-
 using namespace std;
 
-class SimplaMaze2dGenerator : public Maze2dGenerator
+class SimpleMaze2dGenerator : public Maze2dGenerator
 {
 private:
 public:
     // Constractors
-    SimplaMaze2dGenerator(){};
+    SimpleMaze2dGenerator(){};
     // Destractors
-    ~SimplaMaze2dGenerator(){};
+    ~SimpleMaze2dGenerator(){};
     // Operators
     // Getters
     // Setters
@@ -59,7 +47,7 @@ public:
         newMaze[goalPoint[0]][goalPoint[1]] = 3;
 
         Maze2d ctorMaze(name, startPoint, goalPoint, rows, cols, newMaze);
-        cout << "Maze Generated Successfully." << endl;
+        // cout << "Maze Generated Successfully." << endl;
         return ctorMaze;
     };
 };

@@ -4,6 +4,10 @@
 #include "Maze2d.hpp"
 
 #include <chrono>
+#include <iostream>
+#include <string>
+#include <vector>
+#include <cstdlib>
 
 using namespace std;
 
@@ -12,7 +16,7 @@ class Maze2dGenerator
 private:
 public:
     // Constractors
-    Maze2dGenerator() {};
+    Maze2dGenerator(){};
     // Destractors
     virtual ~Maze2dGenerator() = 0;
     // Operators
@@ -24,13 +28,12 @@ public:
     {
         chrono::time_point<chrono::system_clock> startTime = chrono::system_clock::now();
         mazeGenerator(name, rows, cols);
-        chrono::time_point<chrono::system_clock>EndTime = chrono::system_clock::now();
-        chrono::duration<double> timeDiff = EndTime -startTime;
+        chrono::time_point<chrono::system_clock> EndTime = chrono::system_clock::now();
+        chrono::duration<double> timeDiff = EndTime - startTime;
         double timeMeasure = timeDiff.count();
         string result = "It took the algorithm " + to_string(timeMeasure) + " seconds";
         return result;
     };
 };
-
 
 #endif

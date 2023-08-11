@@ -9,6 +9,19 @@
 #include "MazeCompression.hpp"
 #include "BFS.hpp"
 #include "AStar.hpp"
+#include "Files.hpp"
+
+bool isNum(string check)
+{
+    for (int i = 0; i < check.size(); i++)
+    {
+        if (!isdigit(check[i]))
+        {
+            return false;
+        }
+    }
+    return true;
+};
 
 using namespace std;
 //
@@ -23,7 +36,18 @@ class FilePath : public Command
 {
 private:
 public:
-    void doCommand(const vector<string> &param){};
+    void doCommand(const vector<string> &param)
+    {
+        if (param.size() == 1)
+        {
+            Files fd;
+            fd.printFilesInPath(param[0]);
+        }
+        else
+        {
+            cout << "invalid numbers of parameters." << endl;
+        }
+    };
 };
 
 class GenerateMaze : public Command
@@ -32,41 +56,30 @@ private:
 public:
     void doCommand(const vector<string> &param)
     {
-        // string name;
-        // cout << "Enter maze name: " << endl
-        //      << ">";
-        // cin >> name;
-
-        // int rows = 0, cols = 0;
-        // do
-        // {
-        //     cout << "Enter Height: " << endl
-        //          << ">";
-        //     cin >> rows;
-        //     if (rows <= 0)
-        //     {
-        //         cout << "Invalid height number." << endl;
-        //     }
-        // } while (rows <= 0);
-
-        // do
-        // {
-        //     cout << "Enter Width: " << endl
-        //          << ">";
-        //     cin >> cols;
-        //     if (cols <= 0)
-        //     {
-        //         cout << "Invalid width number." << endl;
-        //     }
-        // } while (cols <= 0);
         if (param.size() == 3)
         {
             if (!(Controller::checkIfExist(param[0])))
             {
-                SimplaMaze2dGenerator createMaze;
-                Maze2d *newMaze = new Maze2d(createMaze.mazeGenerator(param[0], stoi(param[1]), stoi(param[2])));
-                Controller::insertMaze(newMaze);
-                cout << "Maze " << newMaze->getMazeName() << " is ready" << endl;
+                if (isNum(param[1]) && isNum(param[2]))
+                {
+                    int height = stoi(param[1]);
+                    int width = stoi(param[2]);
+                    if ((height >= 2 && height <= 100) && (width >= 2 && width <= 100))
+                    {
+                        SimpleMaze2dGenerator createMaze;
+                        Maze2d *newMaze = new Maze2d(createMaze.mazeGenerator(param[0], height, width));
+                        Controller::insertMaze(newMaze);
+                        cout << "Maze " << newMaze->getMazeName() << " is ready" << endl;
+                    }
+                    else
+                    {
+                        cout << "Height and Width must be between 2-100." << endl;
+                    }
+                }
+                else
+                {
+                    cout << "Height and Width must be numbers." << endl;
+                }
             }
             else
             {
@@ -92,13 +105,6 @@ public:
         }
         else
         {
-            // cout << "Mazes size: " << existMaze(param[0]).size() << endl;
-
-            // for (auto it = Controller::mazesArr.cbegin(); it != Controller::mazesArr.cend(); ++it)
-            // {
-            //     std::cout << "{" << (*it).first << ": " << (*it).second->getMazeName() << "}\n";
-            // }
-
             if (Controller::checkIfExist(param[0]))
             {
                 Controller::displayMaze(param[0]);
@@ -123,18 +129,12 @@ public:
         }
         else
         {
-            // cout << "Mazes size: " << Controller::mazesArr.size() << endl;
-            // for (auto it = Controller::mazesArr.cbegin(); it != Controller::mazesArr.cend(); ++it)
-            // {
-            //     std::cout << "{" << (*it).first << ": " << (*it).second->getMazeName() << "}\n";
-            // }
-
             if (Controller::checkIfExist(param[0]))
             {
                 MazeCompression mazeFiles;
                 Maze2d *saveMaze = Controller::getMaze(param[0]);
                 vector<int> mazeData = saveMaze->getData();
-                mazeFiles.save(mazeData, saveMaze->getMazeName());
+                mazeFiles.save(mazeData, param[1]);
                 cout << "The maze named " << saveMaze->getMazeName() << " is saved." << endl;
             }
             else
@@ -188,8 +188,8 @@ public:
             if (Controller::checkIfExist(param[0]))
             {
                 Maze2d *mazeObj = Controller::getMaze(param[0]);
-                double mazeObjFile = sizeof(mazeObj);
-                cout << "The size of the maze object is: " << mazeObjFile << endl;
+                double mazeObjFile = sizeof((*mazeObj));
+                cout << "The size of the maze object is " << mazeObjFile << " bytes." << endl;
             }
             else
             {
@@ -198,32 +198,27 @@ public:
         }
     };
 };
-// class MazeFileSize : public Command
-// {
-// private:
-// public:
-//     void doCommand(const vector<string> &param)
-//     {
-//         if (param.size() == 1)
-//         {
-//             Maze2d mazeObj = mazesArr.find(param[0])->second;
-//             string mazeFileName = mazeObj.getMazeName() + ".txt";
-//             string directoryPath = ".";
-//         try {
-//             for (const auto& entry : fs::directory_iterator(directoryPath)) {
-//             if (fs::is_regular_file(entry) && entry.path().filename() == mazeFileName) {
-//                 std::cout << "File: " << entry.path().filename() << " | Size: " << fs::file_size(entry) << " bytes" << std::endl;
-//                 return 0; // Exit after finding the first occurrence
-//             }
-//         }
-
-//         }
-//         else
-//         {
-//             cout << "invalid numbers of parameters." << endl;
-//         }
-//     };
-//};
+class MazeFileSize : public Command
+{
+private:
+public:
+    void doCommand(const vector<string> &param)
+    {
+        if (param.size() == 1)
+        {
+            Files fd;
+            int size = fd.getFileSize(param[0]);
+            if (size == -1)
+            {
+                cout << "File does not exist in the current folder." << endl;
+            }
+            else
+            {
+                cout << "File Size is " << size << " bytes." << endl;
+            }
+        }
+    };
+};
 
 class SolveMaze : public Command
 {
@@ -247,11 +242,19 @@ public:
                     BFS<int *> *searchBFS = new BFS<int *>();
                     Solution<int *> soluchie = searchBFS->search(Searchie);
                 }
-                if (algName == "AStar")
+                else if (algName == "AStar")
                 {
                     AStar<int *> *searchAStar = new AStar<int *>();
                     Solution<int *> soluchie = searchAStar->search(Searchie);
                 }
+                else
+                {
+                    cout << "Not a valid Search Algorithm." << endl;
+                }
+            }
+            else
+            {
+                cout << "Maze doesn't exists." << endl;
             }
         }
     };
@@ -261,9 +264,25 @@ class DisplayMazeSolution : public Command
 {
 private:
 public:
-    void doCommand(const vector<string> &param){};
+    void doCommand(const vector<string> &param)
+    {
+        if (param.size() != 1)
+        {
+            cout << "invalid numbers of parameters" << endl;
+        }
+        else
+        {
+            if ((Controller::checkIfExist(param[0])))
+            {
+                cout << "Display Solution." << endl;
+            }
+            else
+            {
+                cout << "Maze doesn't exists." << endl;
+            }
+        }
+    };
 };
-
 // run demo
 // play
 // measure creation maze time

@@ -9,19 +9,19 @@ using namespace std;
 void printMenu()
 {
     cout << "\t\t--Menu--" << endl;
-    cout << "1. Display Files" << endl;
-    cout << "2. Generate maze" << endl;
-    cout << "3. Display maze" << endl;
-    cout << "4. Save Maze" << endl;
-    cout << "5. Load Maze" << endl;
-    cout << "6. Maze Size" << endl;
-    cout << "7. File Size" << endl;
-    cout << "8. Solve Maze" << endl;
-    cout << "9. Dislay Solution" << endl;
+    cout << "1. Display Files <File Path>" << endl;
+    cout << "2. Generate Maze <Maze Name> <Height> <Width>" << endl;
+    cout << "3. Display Maze <Maze Name>" << endl;
+    cout << "4. Save Maze <Maze Name> <File Name>" << endl;
+    cout << "5. Load Maze <File Name> <Maze Name>" << endl;
+    cout << "6. Maze Size <Maze Name>" << endl;
+    cout << "7. File Size <File Name>" << endl;
+    cout << "8. Solve Maze <Maze Name> <Algorithm Name>(Options: BFS, AStar)" << endl;
+    cout << "9. Display Solution <Maze Name>" << endl;
     cout << "10. Exit" << endl;
 };
 
-    class CLI
+class CLI
 {
 private:
     istream &m_input;
@@ -43,34 +43,66 @@ public:
     // Functions
     void Start()
     {
-        string cmd;
+        string cmdInput;
         do
         {
             printMenu();
             cout << "Enter Commend: " << endl
                  << ">";
-            cin >> cmd;
-            vector<string> param;
-            // Generate Maze <MazeName> <11> <15>
-            // cmd string + param string
-            if (m_commandSet->findCommend(cmd))
+            getline(cin, cmdInput);
+
+            if (cmdInput == "Exit")
             {
-                m_commandSet->executeCommand(cmd, param);
+                cout << "Goodbye!" << endl;
             }
             else
             {
-                cout << "Command not found." << endl;
-            }
-        } while (cmd != "exit");
+                vector<int> positionsLeft;
+                vector<int> positionsRight;
 
-        // Maze2d saveMaze = mazesArr.find(param[0])->second;
-        // string cmd;
-        // do
-        // {
-        //     printMenu();
-        //     cout << ">";
-        //     cin >> cmd;
-        // } while (cmd != "exit");
+                for (int i = 0; i < cmdInput.size(); i++)
+                {
+                    if (cmdInput[i] == '<')
+                    {
+                        positionsLeft.push_back(i);
+                    }
+                    if (cmdInput[i] == '>')
+                    {
+                        positionsRight.push_back(i);
+                    }
+                }
+
+                if (positionsLeft.size() != positionsRight.size())
+                {
+                    cout << "Invalid Parameters Format." << endl;
+                }
+                else if (positionsLeft.size() < 1 || positionsLeft.size() > 3)
+                {
+                    cout << "Invalid Number Of Parameters." << endl;
+                }
+                else
+                {
+                    string cmd = cmdInput.substr(0, (positionsLeft[0]) - 1);
+
+                    int numOfParam = positionsLeft.size();
+                    vector<string> param;
+                    for (int i = 0; i < numOfParam; i++)
+                    {
+                        param.push_back(cmdInput.substr((positionsLeft[i] + 1), (positionsRight[i]) - (positionsLeft[i] + 1)));
+                    }
+
+                    if (m_commandSet->findCommend(cmd))
+                    {
+                        m_commandSet->executeCommand(cmd, param);
+                    }
+                    else
+                    {
+                        cout << "Command not found." << endl;
+                    }
+                }
+            }
+
+        } while (cmdInput != "Exit");
     };
 };
 

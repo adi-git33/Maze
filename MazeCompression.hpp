@@ -1,5 +1,6 @@
 // ----- Code by: Moran Sinai ID: 206402281 and Adi Levi ID: 316116052
 // #pragma once
+
 #ifndef __MAZECOMPRESSION__
 #define __MAZECOMPRESSION__
 #include "Maze2d.hpp"
@@ -43,22 +44,5 @@ public:
         mazeData.close();
         return loadedVector;
     }
-
-    // int getFileSize(string fileName)
-    // {
-    //     string filename = "example.txt"; // Replace with your file name
-
-    //     if (fs::exists(filename))
-    //     {
-    //         std::cout << "File exists in the current folder." << std::endl;
-    //     }
-    //     else
-    //     {
-    //         std::cout << "File does not exist in the current folder." << std::endl;
-    //     }
-    // };
-    // void printFilesInPath(string path){
-
-    // };
 };
 #endif
