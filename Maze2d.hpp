@@ -72,7 +72,6 @@ public:
 
         int index = 7;
         vector<int> row;
-        // creates random maze
         for (int i = 0; i < m_rows; i++)
         {
             for (int j = 0; j < m_cols; j++)
@@ -96,15 +95,23 @@ public:
 
     friend ostream &operator<<(ostream &os, Maze2d const &Maze)
     {
+
+        for (int i = 0; i < Maze.m_arrMaze[0].size() + 2; i++)
+        {
+            os << "x";
+        }
+        os << endl;
+
         for (int i = 0; i < Maze.m_arrMaze.size(); i++)
         {
+            os << "x";
             for (int j = 0; j < Maze.m_arrMaze[i].size(); j++)
             {
                 switch ((Maze.m_arrMaze[i][j]))
                 {
                 case 0: // way
                 {
-                    os << "o";
+                    os << " ";
                     break;
                 }
                 case 1: // wall
@@ -116,13 +123,19 @@ public:
                 case 3: // goal
                     os << "G";
                     break;
-                case 4: // goal
+                case 4: // Player
                     os << "P";
                     break;
                 }
             }
+            os << "x";
             os << endl;
         }
+        for (int i = 0; i < Maze.m_arrMaze[0].size() + 2; i++)
+        {
+            os << "x";
+        }
+        os << endl;
         return os;
     };
 

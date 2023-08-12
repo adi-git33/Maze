@@ -39,6 +39,10 @@ public:
 		}
 		return smoves;
 	};
+
+	int getWidth() { return m_maze->getRow(); };
+	int getHeight() { return m_maze->getColumn(); };
+
 };
 
 #endif

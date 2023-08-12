@@ -10,13 +10,13 @@ void printMenu()
 {
     cout << "\t\t--Menu--" << endl;
     cout << "1. Display Files <File Path>" << endl;
-    cout << "2. Generate Maze <Maze Name> <Height> <Width>" << endl;
+    cout << "2. Generate Maze <Maze Name> <Height> <Width> <Generate Type>(Options: Simple[might not be solveable], DFS)" << endl;
     cout << "3. Display Maze <Maze Name>" << endl;
     cout << "4. Save Maze <Maze Name> <File Name>" << endl;
     cout << "5. Load Maze <File Name> <Maze Name>" << endl;
     cout << "6. Maze Size <Maze Name>" << endl;
     cout << "7. File Size <File Name>" << endl;
-    cout << "8. Solve Maze <Maze Name> <Algorithm Name>(Options: BFS, AStar)" << endl;
+    cout << "8. Solve Maze <Maze Name> <Option>(Options: Manualy, Algorithm)" << endl;
     cout << "9. Display Solution <Maze Name>" << endl;
     cout << "10. Exit" << endl;
 };
@@ -76,7 +76,7 @@ public:
                 {
                     cout << "Invalid Parameters Format." << endl;
                 }
-                else if (positionsLeft.size() < 1 || positionsLeft.size() > 3)
+                else if (positionsLeft.size() < 1 || positionsLeft.size() > 4)
                 {
                     cout << "Invalid Number Of Parameters." << endl;
                 }

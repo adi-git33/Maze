@@ -47,7 +47,6 @@ public:
         newMaze[goalPoint[0]][goalPoint[1]] = 3;
 
         Maze2d ctorMaze(name, startPoint, goalPoint, rows, cols, newMaze);
-        // cout << "Maze Generated Successfully." << endl;
         return ctorMaze;
     };
 };

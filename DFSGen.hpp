@@ -59,26 +59,9 @@ public:
     {
         m_rows = rows;
         m_cols = cols;
-        m_maze.resize(rows, vector<int>(cols));
-
-        for (int i = 0; i < rows; ++i)
-        {
-            for (int j = 0; j < cols; ++j)
-            {
-                m_maze[i][j] = 1;
-            }
-        }
-
+        m_maze.resize(rows, vector<int>(cols, 1));
         m_visited.resize(rows, vector<bool>(cols, false));
-
-        for (int i = 0; i < rows; ++i)
-        {
-            for (int j = 0; j < cols; ++j)
-            {
-                m_visited[i][j] = false;
-            }
-        }
-        vector<vector<int>> newMaze = DFS(rows, cols);
+        vector<vector<int>> newMaze = DFS(0, 0);
 
         int startPoint[2];
         startPoint[0] = 0;
