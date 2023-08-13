@@ -19,6 +19,10 @@ private:
 public:
 	Solution(){};
 	~Solution(){};
-};
+
+    const State<T>& getSolution() const
+    {
+        return m_solution;
+    }};
 
 #endif
