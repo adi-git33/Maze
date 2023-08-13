@@ -253,33 +253,22 @@ public:
             if ((Controller::checkIfExist(param[0])))
             {
                 Maze2d *mazeObj = Controller::getMaze(param[0]);
-                if (param[1] == "Manualy")
+                string algName = param[1];
+                Maze2dSearchable Searchie((*mazeObj));
+                if (algName == "BFS")
                 {
-                    Player p;
-                    p.Move(mazeObj);
+                    BFS<int *> *searchBFS = new BFS<int *>();
+                    Solution<int *> soluchie = searchBFS->search(Searchie);
+                    
                 }
-                else if (param[1] == "Algorithm")
+                else if (algName == "AStar")
                 {
-                    string algName = param[1];
-                    Maze2dSearchable Searchie((*mazeObj));
-                    if (algName == "BFS")
-                    {
-                        BFS<int *> *searchBFS = new BFS<int *>();
-                        Solution<int *> soluchie = searchBFS->search(Searchie);
-                    }
-                    else if (algName == "AStar")
-                    {
-                        AStar<int *> *searchAStar = new AStar<int *>();
-                        Solution<int *> soluchie = searchAStar->search(Searchie);
-                    }
-                    else
-                    {
-                        cout << "Not a valid Search Algorithm." << endl;
-                    }
+                    AStar<int *> *searchAStar = new AStar<int *>();
+                    Solution<int *> soluchie = searchAStar->search(Searchie);
                 }
                 else
                 {
-                    cout << "Not a valid option" << endl;
+                    cout << "Not a valid Search Algorithm." << endl;
                 }
             }
             else
