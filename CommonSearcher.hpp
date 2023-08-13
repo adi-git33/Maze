@@ -3,6 +3,7 @@
 
 #include "Searcher.hpp"
 #include <chrono>
+#include <queue>
 
 template <class T>
 class CommonSearcher : public Searcher<T>
@@ -10,10 +11,17 @@ class CommonSearcher : public Searcher<T>
 
 protected:
 	int m_evaluatedNodes;
+	std::priority_queue<State<T>> m_openList;
 
 public:
-	CommonSearcher() {};
-
+	// Constractor
+	// CommonSearcher(){};
+	CommonSearcher() : m_evaluatedNodes(0) {}
+	// Destractor
+	~CommonSearcher(){};
+	// Getters
+	virtual int getNumberOfNodesEvaluated() { return m_evaluatedNodes; };
+	// Functions
 	virtual Solution<T> search(const Searchable<T> &s) = 0;
 	virtual void checkEfficiency(const Searchable<T> &s)
 	{
@@ -24,7 +32,11 @@ public:
 		double timeMeasure = timeDiff.count();
 		cout << "It took the algorithm " << to_string(timeMeasure) << " seconds" << endl;
 	}
-
+	const State<T> &popOpenList()
+	{
+		m_evaluatedNodes++;
+		return m_openList.top();
+	}
 };
 
 #endif

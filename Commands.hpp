@@ -10,6 +10,7 @@
 #include "BFS.hpp"
 #include "AStar.hpp"
 #include "Files.hpp"
+#include "DFSGen.hpp"
 
 bool isNum(string check)
 {
@@ -56,29 +57,46 @@ private:
 public:
     void doCommand(const vector<string> &param)
     {
-        if (param.size() == 3)
+        if (param.size() == 4)
         {
             if (!(Controller::checkIfExist(param[0])))
             {
-                if (isNum(param[1]) && isNum(param[2]))
+                if (param[3] == "DFS" || param[3] == "Simple")
                 {
-                    int height = stoi(param[1]);
-                    int width = stoi(param[2]);
-                    if ((height >= 2 && height <= 100) && (width >= 2 && width <= 100))
+                    if (isNum(param[1]) && isNum(param[2]))
                     {
-                        SimpleMaze2dGenerator createMaze;
-                        Maze2d *newMaze = new Maze2d(createMaze.mazeGenerator(param[0], height, width));
-                        Controller::insertMaze(newMaze);
-                        cout << "Maze " << newMaze->getMazeName() << " is ready" << endl;
+                        int height = stoi(param[1]);
+                        int width = stoi(param[2]);
+                        if ((height >= 2 && height <= 27) && (width >= 2 && width <= 27))
+                        {
+                            if (param[3] == "DFS")
+                            {
+                                DFSMaze2dGenerator createMaze;
+                                Maze2d *newMaze = new Maze2d(createMaze.mazeGenerator(param[0], height, width));
+                                Controller::insertMaze(newMaze);
+                                cout << "Maze " << newMaze->getMazeName() << " is ready" << endl;
+                            }
+                            else
+                            {
+                                SimpleMaze2dGenerator createMaze;
+                                Maze2d *newMaze = new Maze2d(createMaze.mazeGenerator(param[0], height, width));
+                                Controller::insertMaze(newMaze);
+                                cout << "Maze " << newMaze->getMazeName() << " is ready" << endl;
+                            }
+                        }
+                        else
+                        {
+                            cout << "Height and Width must be between 2-27." << endl;
+                        }
                     }
                     else
                     {
-                        cout << "Height and Width must be between 2-100." << endl;
+                        cout << "Height and Width must be numbers." << endl;
                     }
                 }
                 else
                 {
-                    cout << "Height and Width must be numbers." << endl;
+                    cout << "Not a generate option." << endl;
                 }
             }
             else
@@ -235,21 +253,33 @@ public:
             if ((Controller::checkIfExist(param[0])))
             {
                 Maze2d *mazeObj = Controller::getMaze(param[0]);
-                string algName = param[1];
-                Maze2dSearchable Searchie((*mazeObj));
-                if (algName == "BFS")
+                if (param[1] == "Manualy")
                 {
-                    BFS<int *> *searchBFS = new BFS<int *>();
-                    Solution<int *> soluchie = searchBFS->search(Searchie);
+                    Player p;
+                    p.Move(mazeObj);
                 }
-                else if (algName == "AStar")
+                else if (param[1] == "Algorithm")
                 {
-                    AStar<int *> *searchAStar = new AStar<int *>();
-                    Solution<int *> soluchie = searchAStar->search(Searchie);
+                    string algName = param[1];
+                    Maze2dSearchable Searchie((*mazeObj));
+                    if (algName == "BFS")
+                    {
+                        BFS<int *> *searchBFS = new BFS<int *>();
+                        Solution<int *> soluchie = searchBFS->search(Searchie);
+                    }
+                    else if (algName == "AStar")
+                    {
+                        AStar<int *> *searchAStar = new AStar<int *>();
+                        Solution<int *> soluchie = searchAStar->search(Searchie);
+                    }
+                    else
+                    {
+                        cout << "Not a valid Search Algorithm." << endl;
+                    }
                 }
                 else
                 {
-                    cout << "Not a valid Search Algorithm." << endl;
+                    cout << "Not a valid option" << endl;
                 }
             }
             else
