@@ -11,107 +11,132 @@ using namespace std;
 class Player
 {
 private:
-    string m_username;
+    int m_uid;
 
 public:
     // Constractor
-    Player(string username) : m_username(username){};
+    Player()
+    {
+        m_uid = 1;
+    };
     // Destractor
     ~Player(){};
     // Operators
     // Getters
     // Setters
     // Functions
-    void Move(Direction movement, Maze2d *maze)
+    void Move(Maze2d *maze)
     {
-        int *pos = maze->getCurrentPosition();
+        int exit = 0;
+        while (exit == 0)
+        {
+            cout << *maze << endl
+                 << "Enter Direction By Number: " << endl
+                 << "1. Up" << endl
+                 << "2. Right " << endl
+                 << "3. Down " << endl
+                 << "4. Left" << endl
+                 << "5. Exit" << endl
+                 << ">";
 
-        switch (movement)
-        {
-        case 0:
-        {
-            if (((pos[0] - 1) > 0))
+            int dir;
+            cin >> dir;
+            int *pos = maze->getCurrentPosition();
+
+            switch (dir)
             {
-                if (maze->getPositionInfo((pos[0] - 1), pos[1]) == 0)
+            case 1:
+            {
+                if (((pos[0] - 1) > 0))
                 {
-                    pos[0] -= 1;
-                    maze->setPosition(pos);
-                    cout << "Move Successfully." << endl;
+                    if (maze->getPositionInfo((pos[0] - 1), pos[1]) == 0)
+                    {
+                        pos[0] -= 1;
+                        maze->setPosition(pos);
+                        cout << "Move Successfully." << endl;
+                    }
+                    else
+                    {
+                        cout << "Cannot move up." << endl;
+                    }
                 }
                 else
                 {
-                    cout << "Cannot move up." << endl;
+                    cout << "Out of borders." << endl;
                 }
+                break;
             }
-            else
+            case 2: // right
             {
-                cout << "Out of borders." << endl;
-            }
-            break;
-        }
-        case 1: // right
-        {
-            if ((pos[1] + 1 < maze->getColumn()))
-            {
-                if (maze->getPositionInfo(pos[0], (pos[1] + 1)) == 0)
+                if ((pos[1] + 1 < maze->getColumn()))
                 {
-                    pos[1] += 1;
-                    maze->setPosition(pos);
-                    cout << "Move Successfully." << endl;
+                    if (maze->getPositionInfo(pos[0], (pos[1] + 1)) == 0)
+                    {
+                        pos[1] += 1;
+                        maze->setPosition(pos);
+                        cout << "Move Successfully." << endl;
+                    }
+                    else
+                    {
+                        cout << "Cannot move right." << endl;
+                    }
                 }
                 else
                 {
-                    cout << "Cannot move right." << endl;
+                    cout << "Out of borders." << endl;
                 }
+                break;
             }
-            else
+            case 3: // down
             {
-                cout << "Out of borders." << endl;
-            }
-            break;
-        }
-        case 2: // down
-        {
-            if ((pos[0] + 1) < maze->getRow())
-            {
-                if (maze->getPositionInfo((pos[0] + 1), pos[1]) == 0)
+                if ((pos[0] + 1) < maze->getRow())
                 {
-                    pos[0] += 1;
-                    maze->setPosition(pos);
-                    cout << "Move Successfully." << endl;
+                    if (maze->getPositionInfo((pos[0] + 1), pos[1]) == 0)
+                    {
+                        pos[0] += 1;
+                        maze->setPosition(pos);
+                        cout << "Move Successfully." << endl;
+                    }
+                    else
+                    {
+                        cout << "Cannot move down." << endl;
+                    }
                 }
                 else
                 {
-                    cout << "Cannot move down." << endl;
+                    cout << "Out of borders." << endl;
                 }
+                break;
             }
-            else
+            case 4: // left
             {
-                cout << "Out of borders." << endl;
-            }
-            break;
-        }
-        case 3: // left
-        {
-            if (((pos[1] - 1) > 0))
-            {
-                if (maze->getPositionInfo((pos[0] - 1), pos[1]) == 0)
+                if (((pos[1] - 1) > 0))
                 {
-                    pos[1] -= 1;
-                    maze->setPosition(pos);
-                    cout << "Move Successfully." << endl;
+                    if (maze->getPositionInfo((pos[0] - 1), pos[1]) == 0)
+                    {
+                        pos[1] -= 1;
+                        maze->setPosition(pos);
+                        cout << "Move Successfully." << endl;
+                    }
+                    else
+                    {
+                        cout << "Cannot move left." << endl;
+                    }
                 }
                 else
                 {
-                    cout << "Cannot move left." << endl;
+                    cout << "Out of borders." << endl;
                 }
+                break;
             }
-            else
+            case 5:
             {
-                cout << "Out of borders." << endl;
+                exit = 1;
+                break;
             }
-            break;
-        }
+            default:
+                cout << "Invalid Option." << endl;
+            }
         }
     };
 };

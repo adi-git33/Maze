@@ -16,7 +16,7 @@ void printMenu()
     cout << "5. Load Maze <File Name> <Maze Name>" << endl;
     cout << "6. Maze Size <Maze Name>" << endl;
     cout << "7. File Size <File Name>" << endl;
-    cout << "8. Solve Maze <Maze Name> <Algorithm Name>(Options: BFS, AStar)" << endl;
+    cout << "8. Solve Maze <Maze Name> <Option>(Options: Manualy, Algorithm)" << endl;
     cout << "9. Display Solution <Maze Name>" << endl;
     cout << "10. Exit" << endl;
 };
