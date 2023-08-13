@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Udi/Shenkar/Designing Analysis/FinalProj/Maze",
-      "program": "c:/Udi/Shenkar/Designing Analysis/FinalProj/Maze/build/Debug/outDebug",
+      "cwd": "c:/Users/user/OneDrive/מסמכים/GitHub/Maze/Maze",
+      "program": "c:/Users/user/OneDrive/מסמכים/GitHub/Maze/Maze/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

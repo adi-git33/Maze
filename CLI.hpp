@@ -49,6 +49,10 @@ public:
             printMenu();
             cout << "Enter Commend: " << endl
                  << ">";
+            if (std::cin.peek() == '\n')
+            {
+                std::cin.ignore();
+            }
             getline(cin, cmdInput);
 
             if (cmdInput == "Exit")
@@ -101,7 +105,6 @@ public:
                     }
                 }
             }
-
         } while (cmdInput != "Exit");
     };
 };

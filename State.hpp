@@ -18,6 +18,7 @@ public:
 	~State(){};
 	bool operator==(State &s) { return m_state.compare(s.m_state) == 0; }
 	T &getState() { return m_state; }
+	void setValue(T newValue ){ m_state = newValue;};
 };
 
 #endif

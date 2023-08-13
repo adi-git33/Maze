@@ -169,9 +169,16 @@ public:
     // Setters
     void setPosition(int *newPos)
     {
+        if (m_arrMaze[m_position[0]][m_position[1]] != 3 && m_arrMaze[m_position[0]][m_position[1]] != 2)
+        {
+            m_arrMaze[m_position[0]][m_position[1]] = 0;
+        }
         m_position[0] = newPos[0];
         m_position[1] = newPos[1];
-        m_arrMaze[m_position[0]][m_position[1]] = 4;
+        if (m_arrMaze[m_position[0]][m_position[1]] != 3 && m_arrMaze[m_position[0]][m_position[1]] != 2)
+        {
+            m_arrMaze[m_position[0]][m_position[1]] = 4;
+        }
     };
     // Functions
     vector<int> getData()
