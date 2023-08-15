@@ -7,7 +7,7 @@ template <class T>
 class AStar : public CommonSearcher<T>
 {
 public:
-	virtual Solution<T> search(const Searchable<T> &s)
+	virtual Solution<T> search(Searchable<T> &s)
 	{
 		cout << "A* Solution" << endl;
 

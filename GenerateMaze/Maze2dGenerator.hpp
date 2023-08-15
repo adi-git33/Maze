@@ -1,7 +1,7 @@
-// #pragma once
 #ifndef __MAZE2DGENERATOR__
 #define __MAZE2DGENERATOR__
-#include "Maze2d.hpp"
+
+#include "../Maze2d.hpp"
 
 #include <chrono>
 #include <iostream>
@@ -18,7 +18,7 @@ public:
     // Constractors
     Maze2dGenerator(){};
     // Destractors
-    virtual ~Maze2dGenerator() = 0;
+    virtual ~Maze2dGenerator(){};
     // Operators
     // Getters
     // Setters

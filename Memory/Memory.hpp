@@ -1,10 +1,12 @@
 // ----- Code by: Moran Sinai ID: 206402281 and Adi Levi ID: 316116052
-// #pragma once
 #ifndef __MEMORY__
 #define __MEMORY__
 
-#include "Maze2d.hpp"
+#include "../Maze2d.hpp"
 
+#include <filesystem>
+#include <fstream>
+#include <dirent.h>
 #include <iostream>
 #include <string>
 #include <memory>

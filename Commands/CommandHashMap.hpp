@@ -5,13 +5,14 @@
 #include <iostream>
 #include <cstring>
 #include <map>
+#include <memory>
 
 using namespace std;
 
 class CommandHM
 {
 private:
-    std::map<std::string, Command *> m_ComMap;
+    std::map<std::string, unique_ptr<Command>> m_ComMap;
 
 public:
     // Constractors
@@ -22,13 +23,11 @@ public:
     // Getters
     // Setters
     // Functions
-    void insertCommand(string &theCom, Command *newCommand)
+    void insertCommand(string &theCom, unique_ptr<Command> newCommand)
     {
         if (m_ComMap.find(theCom) == m_ComMap.end())
         {
-            cout << theCom;
-            m_ComMap.insert(std::make_pair(theCom, newCommand));
-            cout << "Command insert successfuly." << endl;
+            m_ComMap.insert(std::make_pair(theCom, move(newCommand)));
         }
         else
         {
@@ -46,10 +45,11 @@ public:
             return false;
         }
     }
-    void executeCommand(string &cmd, vector<string> &param)
+    void executeCommand(string &cmd, vector<string> &param, Maze2dModel *myModel)
     {
-        auto command = m_ComMap.find(cmd)->second;
-        command->doCommand(param);
+        auto commandIter = m_ComMap.find(cmd);
+        auto &command = commandIter->second;
+        command->doCommand(param, myModel);
     }
 };
 

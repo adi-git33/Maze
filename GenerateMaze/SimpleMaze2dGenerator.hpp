@@ -1,7 +1,5 @@
-// #pragma once
 #ifndef __SIMPLEMAZE2DGENERATOR__
 #define __SIMPLEMAZE2DGENERATOR__
-#include "Maze2d.hpp"
 #include "Maze2dGenerator.hpp"
 
 using namespace std;
@@ -29,7 +27,6 @@ public:
         goalPoint[1] = cols - 1;
 
         vector<vector<int>> newMaze;
-        // creates random maze
         srand(time(nullptr));
         vector<int> row;
         for (int i = 0; i < rows; i++)

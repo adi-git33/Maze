@@ -1,3 +1,6 @@
+#ifndef __FILES__
+#define __FILES__
+
 #include "MazeCompression.hpp"
 #include <filesystem>
 
@@ -20,21 +23,25 @@ public:
             return -1;
         }
     };
-    void printFilesInPath(string path)
+    string printFilesInPath(string path)
     {
+        string result = "";
         if (fs::exists(path))
         {
             for (const auto &entry : fs::directory_iterator(path))
             {
                 if (fs::is_regular_file(entry))
                 {
-                    cout << entry.path().filename() << endl;
+                    result += entry.path().filename().string() + "\n";
                 }
             }
         }
         else
         {
-            cout << "Path doesn't exist." << endl;
+            result = "Path doesn't exist.";
         }
+        return result;
     };
 };
+
+#endif

@@ -2,7 +2,7 @@
 // #define __CLI_
 #pragma once
 
-#include "CommandHashMap.hpp"
+#include "View.hpp"
 
 using namespace std;
 // void printMenu()
@@ -21,27 +21,43 @@ void printMenu()
     cout << "10. Exit" << endl;
 };
 
-class CLI
+class CLI : public View
 {
 private:
     istream &m_input;
     ostream &m_output;
-    CommandHM *m_commandSet;
 
 public:
     // Constractor
-    CLI(std::istream &input = std::cin, std::ostream &output = std::cout, CommandHM *commands = NULL)
-        : m_input(input), m_output(output), m_commandSet(commands){};
-    CLI(CommandHM *commands)
-        : m_input(std::cin), m_output(std::cout), m_commandSet(commands){};
-
+    CLI(std::istream &input = std::cin, std::ostream &output = std::cout)
+        : m_input(input), m_output(output){};
     // Destractor
     ~CLI(){};
     // Operators
     // Getters
     // Setters
+
     // Functions
-    void Start()
+    virtual void PrintResult(string result)
+    {
+        cout << result << endl;
+    };
+    virtual void Notify(string cmd, vector<string> s)
+    {
+        for (const auto &observerPair : m_observers)
+        {
+            observerPair.second->viewUpdate(cmd, s);
+        }
+    };
+    virtual void NotifyStatus(string status)
+    {
+        for (const auto &observerPair : m_observers)
+        {
+            observerPair.second->returnStatus(status);
+        }
+    };
+
+    virtual void Start()
     {
         string cmdInput;
         do
@@ -94,14 +110,75 @@ public:
                     {
                         param.push_back(cmdInput.substr((positionsLeft[i] + 1), (positionsRight[i]) - (positionsLeft[i] + 1)));
                     }
-
-                    if (m_commandSet->findCommend(cmd))
+                    if (cmd == "Solve Maze")
                     {
-                        m_commandSet->executeCommand(cmd, param);
+                        if (param[1] == "Manualy")
+                        {
+                            m_state.find("Controller")->second = false;
+                            NotifyStatus(param[0]);
+                            if (m_state.find("Controller")->second == true)
+                            {
+                                int exit = 0;
+                                while (!(exit))
+                                {
+                                    vector<string> mazeName;
+                                    mazeName.push_back(param[0]);
+
+                                    Notify("Display Maze", mazeName);
+                                    cout
+                                        << "Enter Direction: " << endl
+                                        << "1. Up" << endl
+                                        << "2. Down" << endl
+                                        << "3. Right " << endl
+                                        << "4. Left" << endl
+                                        << "5. Exit" << endl
+                                        << ">";
+
+                                    m_state.find("Controller")->second = false;
+                                    string direct;
+                                    cin >> direct;
+                                    if (direct == "Exit")
+                                    {
+                                        exit = 1;
+                                    }
+                                    else
+                                    {
+                                        cmd = "Solve Maze Manualy";
+                                        param[1] = direct;
+                                        Notify(cmd, param);
+                                        if (m_state.find("Controller")->second == true)
+                                        {
+                                            exit = 1;
+                                            m_state.find("Controller")->second = false;
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                cout << "Maze doesn't exists." << endl;
+                            }
+                        }
+                        else if (param[1] == "Algorithm")
+                        {
+                            cout << "Choose algorithm: " << endl
+                                 << "1. BFS" << endl
+                                 << "2. AStar" << endl
+                                 << ">";
+                            string alg;
+                            cin >> alg;
+                            param[1] = alg;
+                            cmd = "Solve Maze Algorithm";
+                            Notify(cmd, param);
+                        }
+                        else
+                        {
+                            cout << "Not a valid option." << endl;
+                        }
                     }
                     else
                     {
-                        cout << "Command not found." << endl;
+                        Notify(cmd, param);
                     }
                 }
             }

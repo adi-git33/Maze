@@ -11,7 +11,7 @@ class CommonSearcher : public Searcher<T>
 
 protected:
 	int m_evaluatedNodes;
-	std::priority_queue<State<T>> m_openList;
+	queue<State<T>> m_openList;
 
 public:
 	// Constractor
@@ -22,8 +22,8 @@ public:
 	// Getters
 	virtual int getNumberOfNodesEvaluated() { return m_evaluatedNodes; };
 	// Functions
-	virtual Solution<T> search(const Searchable<T> &s) = 0;
-	virtual void checkEfficiency(const Searchable<T> &s)
+	virtual Solution<T> search(Searchable<T> &s) = 0;
+	virtual void checkEfficiency(Searchable<T> &s)
 	{
 		chrono::time_point<chrono::system_clock> startTime = chrono::system_clock::now();
 		search(s);

@@ -69,6 +69,8 @@ public:
         m_start[1] = mazeInVector.at(4);
         m_goal[0] = mazeInVector.at(5);
         m_goal[1] = mazeInVector.at(6);
+        m_position[0] = m_start[0];
+        m_position[1] = m_start[1];
 
         int index = 7;
         vector<int> row;
@@ -98,13 +100,13 @@ public:
 
         for (int i = 0; i < Maze.m_arrMaze[0].size() + 2; i++)
         {
-            os << "x";
+            os << "#";
         }
         os << endl;
 
         for (int i = 0; i < Maze.m_arrMaze.size(); i++)
         {
-            os << "x";
+            os << "#";
             for (int j = 0; j < Maze.m_arrMaze[i].size(); j++)
             {
                 switch ((Maze.m_arrMaze[i][j]))
@@ -115,7 +117,7 @@ public:
                     break;
                 }
                 case 1: // wall
-                    os << "x";
+                    os << "#";
                     break;
                 case 2: // start
                     os << "S";
@@ -126,14 +128,17 @@ public:
                 case 4: // Player
                     os << "P";
                     break;
+                case 5: // solved path
+                    os << "O";
+                    break;
                 }
             }
-            os << "x";
+            os << "#";
             os << endl;
         }
         for (int i = 0; i < Maze.m_arrMaze[0].size() + 2; i++)
         {
-            os << "x";
+            os << "#";
         }
         os << endl;
         return os;
@@ -166,6 +171,26 @@ public:
     int getRow() { return m_rows; };
     int getColumn() { return m_cols; };
     string getMazeName() { return m_mazeName; };
+    int getMazeSize()
+    {
+        int sumSize = 0;
+        sumSize += sizeof(m_id);
+        sumSize += m_mazeName.size();
+        sumSize += sizeof(m_start[0]);
+        sumSize += sizeof(m_start[1]);
+        sumSize += sizeof(m_goal[0]);
+        sumSize += sizeof(m_goal[1]);
+        sumSize += sizeof(m_position[0]);
+        sumSize += sizeof(m_position[1]);
+        sumSize += sizeof(m_rows);
+        sumSize += sizeof(m_cols);
+        for (const auto &innerVector : m_arrMaze)
+        {
+            sumSize += sizeof(innerVector);
+            sumSize += innerVector.size() * sizeof(int);
+        }
+        return sumSize;
+    };
     // Setters
     void setPosition(int *newPos)
     {
@@ -180,15 +205,10 @@ public:
             m_arrMaze[m_position[0]][m_position[1]] = 4;
         }
     };
+
     // Functions
     vector<int> getData()
     {
-        // cout << "Maze Info" << endl;
-        // cout << "Maze id: " << m_mazeID << endl;
-        // cout << "Maze Start Point: [" << m_start[0] << "," << m_start[1] << "]" << endl;
-        // cout << "Maze End Point: [" << m_goal[0] << "," << m_goal[1] << "]" << endl;
-        // cout << "Maze Height: " << m_cols << endl;
-        // cout << "Maze Width: " << m_rows << endl;
         vector<int> mazeData;
         mazeData = {m_id, m_rows, m_cols, m_start[0], m_start[1], m_goal[0], m_goal[1]};
 
@@ -196,8 +216,6 @@ public:
         {
             mazeData.insert(mazeData.end(), row.begin(), row.end());
         }
-        cout << "converted Maze to Vector" << endl;
-
         return mazeData;
     };
     vector<int *> *getPossibleMoves(int *state)
@@ -230,8 +248,56 @@ public:
             pos[1] = (column - 1);
             possibleMoves->push_back(pos);
         }
-
         return possibleMoves;
+    };
+
+    string mazeToString()
+    {
+        string m;
+        for (int i = 0; i < m_arrMaze[0].size() + 2; i++)
+        {
+            m += "#";
+        }
+        m += "\n";
+
+        for (int i = 0; i < m_arrMaze.size(); i++)
+        {
+            m += "#";
+            for (int j = 0; j < m_arrMaze[i].size(); j++)
+            {
+                switch ((m_arrMaze[i][j]))
+                {
+                case 0: // way
+                {
+                    m += " ";
+                    break;
+                }
+                case 1: // wall
+                    m += "#";
+                    break;
+                case 2: // start
+                    m += "S";
+                    break;
+                case 3: // goal
+                    m += "G";
+                    break;
+                case 4: // Player
+                    m += "P";
+                    break;
+                case 5: // solved path
+                    m += "O";
+                    break;
+                }
+            }
+            m += "#";
+            m += "\n";
+        }
+        for (int i = 0; i < m_arrMaze[0].size() + 2; i++)
+        {
+            m += "#";
+        }
+        m += "\n";
+        return m;
     }
 };
 

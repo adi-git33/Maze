@@ -2,7 +2,7 @@
 #ifndef __MAZE2DSEARCHABLE__
 #define __MAZE2DSEARCHABLE__
 #include "Searchable.hpp"
-#include "Maze2d.hpp"
+#include "../Maze2d.hpp"
 
 class Maze2dSearchable : public Searchable<int *>
 {
@@ -10,11 +10,9 @@ private:
 	Maze2d *m_maze;
 
 public:
-	// Maze2dSearchable(const Maze2d &maze) : m_maze(&maze) {}
 	Maze2dSearchable(Maze2d &maze) : m_maze(&maze){};
 	Maze2dSearchable(Maze2d *Maze) : m_maze(Maze){};
 
-	// ADD implementation for those methodes
 	virtual State<int *> *getStartState()
 	{
 		int *s = m_maze->getStartPosition();
@@ -39,10 +37,8 @@ public:
 		}
 		return smoves;
 	};
-
-	int getWidth() { return m_maze->getRow(); };
-	int getHeight() { return m_maze->getColumn(); };
-
+	virtual int getWidth() { return m_maze->getRow(); };
+	virtual int getHeight() { return m_maze->getColumn(); };
 };
 
 #endif

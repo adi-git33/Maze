@@ -1,53 +1,66 @@
-// #ifndef __CONTROLLER__
-// #define __CONTROLLER__
-#pragma once
+#ifndef __CONTROLLER__
+#define __CONTROLLER__
 
-#include <map>
-#include "Maze2d.hpp"
-// #include "Model.hpp"
-// #include "View.hpp"
+
+#include "Maze2dModel.hpp"
+#include "CLI.hpp"
+#include "Commands/CommandHashMap.hpp"
+#include "Observer.hpp"
 
 using namespace std;
 
-class Controller
+class Controller : public Observer
 {
 protected:
-    static map<string, Maze2d *> m_mazes;
-    // Model *m_model;
-    // View *m_view;
+    Maze2dModel *m_model;
+    View *m_view;
+    CommandHM *m_commandSet;
 
 public:
     // Constractor
-    Controller(){};
+    Controller(Maze2dModel *newModel, View *newView, CommandHM *newCmndHM)
+    {
+        m_model = newModel;
+        m_model->AttachObserver(this);
+        m_view = newView;
+        m_view->AttachObserver("Controller", this);
+        m_commandSet = newCmndHM;
+    };
     // Destractor
     ~Controller(){};
     // Operators
     // Getters
-    static std::map<std::string, Maze2d *>::iterator getEndMazes() { return m_mazes.end(); };
-    static int getMazesSize() { return m_mazes.size(); };
-    static Maze2d *getMaze(string mazeName) { return m_mazes.find(mazeName)->second; };
     // Setters
     // Functions
-    static bool checkIfExist(string mazeName)
+    virtual void modelUpdate(string result)
     {
-        if (m_mazes.find(mazeName) == m_mazes.end())
+        if (result == "Congrats, you won!")
         {
-            return false;
+            m_view->setStatus("Controller", true);
+        }
+        m_view->PrintResult(result);
+    };
+    virtual void viewUpdate(string cmd, vector<string> s)
+    {
+        if (m_commandSet->findCommend(cmd))
+        {
+            m_commandSet->executeCommand(cmd, s, m_model);
         }
         else
         {
-            return true;
+            m_view->PrintResult("Command not found.");
         }
     };
-    static void insertMaze(Maze2d *newMaze)
+    virtual void returnStatus(string status)
     {
-        Controller::m_mazes.insert(pair<string, Maze2d *>(newMaze->getMazeName(), newMaze));
-    }
-    static void displayMaze(string mazeName)
-    {
-        cout << *(m_mazes.find(mazeName)->second) << endl;
-    }
-};
-map<string, Maze2d *> Controller::m_mazes;
+        bool res = m_model->checkIfExist(status);
+        m_view->setStatus("Controller", res);
+    };
 
-// #endif
+    void startFunc()
+    {
+        m_view->Start();
+    };
+};
+
+#endif
