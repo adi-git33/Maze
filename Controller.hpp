@@ -1,6 +1,7 @@
+// ----- Code by: Moran Sinai ID: 206402281 and Adi Levi ID: 316116052
+
 #ifndef __CONTROLLER__
 #define __CONTROLLER__
-
 
 #include "Maze2dModel.hpp"
 #include "CLI.hpp"

@@ -1,6 +1,7 @@
-// #ifndef __CLI__
-// #define __CLI_
-#pragma once
+// ----- Code by: Moran Sinai ID: 206402281 and Adi Levi ID: 316116052
+
+#ifndef __CLI__
+#define __CLI_
 
 #include "View.hpp"
 
@@ -186,4 +187,4 @@ public:
     };
 };
 
-// #endif
+#endif

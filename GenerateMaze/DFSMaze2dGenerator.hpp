@@ -1,3 +1,5 @@
+// ----- Code by: Moran Sinai ID: 206402281 and Adi Levi ID: 316116052
+
 #ifndef __DFSMAZE2DGENERATOR__
 #define __DFSMAZE2DGENERATOR__
 

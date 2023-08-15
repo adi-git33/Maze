@@ -1,4 +1,5 @@
-// #pragma once
+// ----- Code by: Moran Sinai ID: 206402281 and Adi Levi ID: 316116052
+
 #ifndef __MAZE2DMODEL__
 #define __MAZE2DMODEL__
 
