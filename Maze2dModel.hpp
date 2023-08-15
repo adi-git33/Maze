@@ -26,8 +26,6 @@ public:
     ~Maze2dModel(){};
     // Operators
     // Getters
-    map<string, Maze2d *>::iterator getEndMazes() { return m_mazes.end(); };
-    int getMazesSize() { return m_mazes.size(); };
     Maze2d *getMaze(string mazeName) { return m_mazes.find(mazeName)->second; };
     // Setters
     // Update Observers

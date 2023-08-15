@@ -12,7 +12,7 @@ using namespace std;
 class CommandHM
 {
 private:
-    std::map<std::string, unique_ptr<Command>> m_ComMap;
+    map<string, unique_ptr<Command>> m_ComMap;
 
 public:
     // Constractors

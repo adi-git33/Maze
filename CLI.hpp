@@ -5,7 +5,7 @@
 #include "View.hpp"
 
 using namespace std;
-// void printMenu()
+
 void printMenu()
 {
     cout << "\t\t--Menu--" << endl;
